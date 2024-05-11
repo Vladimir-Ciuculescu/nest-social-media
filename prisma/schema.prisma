@@ -14,17 +14,27 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  email    String @unique
+  id       Int       @id @default(autoincrement())
+  username String    @unique
+  email    String    @unique
+  password String
   posts    Post[] // One-to-Many relationship with Post
+  comments Comment[]
 }
 
 model Post {
-  id      Int    @id @default(autoincrement())
-  title   String
-  content String
-  user    User   @relation(fields: [user_id], references: [id])
+  id       Int       @id @default(autoincrement())
+  title    String
+  content  String
+  user     User      @relation(fields: [user_id], references: [id])
+  user_id  Int
+  comments Comment[]
+}
 
+model Comment {
+  id      Int  @id @default(autoincrement())
+  user    User @relation(fields: [user_id], references: [id])
   user_id Int
+  post    Post @relation(fields: [post_id], references: [id])
+  post_id Int
 }

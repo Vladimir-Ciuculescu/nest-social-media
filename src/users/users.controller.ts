@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  UseInterceptors,
+} from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
@@ -13,6 +20,11 @@ export class UsersController {
   addUser(@Body() body: CreateUserDto) {
     return this.usersService.addUser(body);
   }
+
+  // @Get('/id')
+  // findUser(@Param('id') id: string) {
+  //   // return this.usersService.findUser();
+  // }
 
   @Get('')
   //   @UseInterceptors(new SerializeInterceptor(UserDto))
